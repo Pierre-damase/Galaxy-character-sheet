@@ -17,32 +17,32 @@
         
         <div id="joueur">
             <label for="joueur">Joueur:</label>
-            <input type="text" name="joueur" placeholder="William" onblur="checkEmpty(this);">
+            <input type="text" name="joueur" placeholder="William" onblur="checkEmpty(this);" title="Le nom du Joueur">
         </div>
         
         <div id="identite">
             <label for="nom">Nom:</label>
-            <input type="text" name="nom" placeholder="Nom" onblur="checkEmpty(this);">
+            <input type="text" name="nom" placeholder="Nom" onblur="checkEmpty(this);" title="Le nom du personnage">
 
             <label for="age">Age:</label>
-            <input type="number" name="age" placeholder="6" min="1" onblur="checkEmpty(this);">
+            <input type="number" name="age" placeholder="6" min="1" onblur="checkEmpty(this);" title="Age du personnage" >
         </div>
 
         <div id="type">
             <label for="type">Type:</label>
-            <input type="text" name="type" placeholder="Humain.e" onblur="checkEmpty(this);">
+            <input type="text" name="type" placeholder="Humain.e" onblur="checkEmpty(this);" title="Le type d'humain du personnage">
 
             <label for="archétype">Archétype:</label>
-            <input type="text" name="archétype" placeholder="Soldat" onblur="checkEmpty(this);">
+            <input type="text" name="archétype" placeholder="Soldat" onblur="checkEmpty(this);" title="L'archetype du personnage">
             
         </div>
 
         <div id="xp">
             <label for="xp">xp:</label>
-            <input type="number" name="xp" placeholder="50" min="1" onblur="checkEmpty(this);">
+            <input type="number" name="xp" placeholder="50" min="1" onblur="checkEmpty(this);" title="L'experience total obtenues par le personnage">
     
             <label for="unused-xp">xp non utilisé:</label>
-            <input type="number" name="unused-xp" placeholder="50" onblur="checkEmpty(this);">
+            <input type="number" name="unused-xp" placeholder="50" onblur="checkEmpty(this);" title="L'experience pas encore utilisés par le personnage">
         </div>
     </div>
 
@@ -56,7 +56,7 @@
                 <label for="quick">Agilité</label>
             </button>
             <input type="number" name="quick" min="5" max="15" value="10" 
-            onkeyup="checkCharacteristic(this);" onchange="setTotal(this);">
+            onkeyup="checkCharacteristic(this);" onchange="setTotal(this);" title="Utilisé les fleches pour changer la valeur">
         </div>
         <div>
             <button name="roll_Check" type="roll" value="">
