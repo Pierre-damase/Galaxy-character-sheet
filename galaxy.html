@@ -1,0 +1,233 @@
+<!-- The HTML will automatically refer to the CSS code and classes -->
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" href="galaxy.css">
+    <script src="galaxy.js"></script>
+</head>
+
+<!-- TAB -->
+<input class="tab" name="page-selection" type="hidden" value="1"/>
+<!-- Character sheet -->
+<div>
+
+    <!------------------------------------------------------------------------------------------->
+    <!-- CHARACTER SECTION                                                                     -->
+    <!------------------------------------------------------------------------------------------->
+    <div class="info" id="character-info">
+        
+        <div id="joueur">
+            <label for="joueur">Joueur:</label>
+            <input type="text" name="joueur" placeholder="William" onblur="checkEmpty(this);">
+        </div>
+        
+        <div id="identite">
+            <label for="nom">Nom:</label>
+            <input type="text" name="nom" placeholder="Nom" onblur="checkEmpty(this);">
+
+            <label for="age">Age:</label>
+            <input type="number" name="age" placeholder="6" min="1" onblur="checkEmpty(this);">
+        </div>
+
+        <div id="type">
+            <label for="type">Type:</label>
+            <input type="text" name="type" placeholder="Humain.e" onblur="checkEmpty(this);">
+
+            <label for="archétype">Archétype:</label>
+            <input type="text" name="archétype" placeholder="Soldat" onblur="checkEmpty(this);">
+            
+        </div>
+
+        <div id="xp">
+            <label for="xp">xp:</label>
+            <input type="number" name="xp" placeholder="50" min="1" onblur="checkEmpty(this);">
+    
+            <label for="unused-xp">xp non utilisé:</label>
+            <input type="number" name="unused-xp" placeholder="50" onblur="checkEmpty(this);">
+        </div>
+    </div>
+
+    <!------------------------------------------------------------------------------------------->
+    <!-- CHARACTERISTIC SECTION                                                                -->
+    <!------------------------------------------------------------------------------------------->
+    <div class="info" id="characteristic-info">
+        <!-- Ajouté code symbaroum pour roll20 quand on appuie sur les boutons -->
+        <div>
+            <button name="roll_Check" type="roll" value="">
+                <label for="quick">Agilité</label>
+            </button>
+            <input type="number" name="quick" min="5" max="15" value="10" 
+            onkeyup="checkCharacteristic(this);" onchange="setTotal(this);">
+        </div>
+        <div>
+            <button name="roll_Check" type="roll" value="">
+                <label for="cunning">Astuce</label>
+            </button>
+            <input type="number" name="cunning" min="5" max="15" value="10" 
+            onkeyup="checkCharacteristic(this);" onchange="setTotal(this);">
+        </div>
+        <div>
+            <button name="roll_Check" type="roll" value="">
+                <label for="discreet">Discrétion</label>
+            </button>
+            <input type="number" name="discreet" min="5" max="15" value="10" 
+            onkeyup="checkCharacteristic(this);" onchange="setTotal(this);">
+        </div>
+        <div>
+            <button name="roll_Check" type="roll" value="">
+                <label for="strong">Force</label>
+            </button>
+            <input type="number" name="strong" min="5" max="15" value="10" 
+            onkeyup="checkCharacteristic(this); setToughness();" onchange="setTotal(this);">
+        </div>
+        <div>
+            <button name="roll_Check" type="roll" value="">
+                <label for="persuasive">Persuasion</label>
+            </button>
+            <input type="number" name="persuasive" min="5" max="15" value="10" 
+            onkeyup="checkCharacteristic(this);" onchange="setTotal(this);">
+        </div>
+        <div>
+            <button name="roll_Check" type="roll" value="">
+                <label for="accurate">Précision</label>
+            </button>
+            <input type="number" name="accurate" min="5" max="15" value="10" 
+            onkeyup="checkCharacteristic(this);" onchange="setTotal(this);">
+        </div>
+        <div>
+            <button name="roll_Check" type="roll" value="">
+                <label for="vigilant">Vigilance</label>
+            </button>
+            <input type="number" name="vigilant" min="5" max="15" value="10" 
+            onkeyup="checkCharacteristic(this);" onchange="setTotal(this);">
+        </div>
+        <div>
+            <button name="roll_Check" type="roll" value="">
+                <label for="resolute">Volonté</label>
+            </button>
+            <input type="number" name="resolute" min="5" max="15" value="10" 
+            onkeyup="checkCharacteristic(this); setStress();" onchange="setTotal(this);">
+        </div>
+        <div>
+            <button value="">
+                <label for="total">Total</label>
+            </button>
+            <input type="number" name="total" min="40" max="80" value="" readonly>
+        </div>       
+        
+        <div id="characteristic-error"></div>
+    </div>
+    
+    <!------------------------------------------------------------------------------------------->
+    <!-- TAB SECTION                                                                           -->
+    <!------------------------------------------------------------------------------------------->
+    <div class="info" id="tab">
+        <button class="tablinks" onclick="openTab(this, 'section1');">Personnage</button>
+        <button class="tablinks" onclick="openTab(this, 'section2');">Compétences</button>
+        <button class="tablinks" id="default-tab" onclick="openTab(this, 'section3');">Inventaire</button>
+    </div>
+
+    <!------------------------------------------------------------------------------------------->
+    <!-- ENDURANCE/STRESS SECTION - section 1                                                  -->
+    <!------------------------------------------------------------------------------------------->
+    <div class="info subsection section1" id="endurance_stress-info">
+        <div>
+            <h2>Endurance</h2>
+            <div id="endurance">
+                <div>
+                    <label for="current">Actuelle</label>
+                    <input type="number" name="current" min="0" max="15" value="10"
+                    onkeyup="setToughnessGauge();">
+                </div>
+                <div>
+                    <label for="toughness_max">Max.</label>
+                    <input type="number" name="toughness_max" min="0" max="15" value="" readonly>
+                </div>
+                <div>
+                    <label for="pain_threshold">Rés. à la douleur</label>
+                    <input type="number" name="pain_threshold" min="0" max="10" value="5" readonly>
+                </div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress" id="endurance-progresse"></div>
+            </div>
+        </div>
+
+        <div>
+            <h2>Stress</h2>
+            <div id="stress">
+                <div>
+                    <label for="stress_tmp">Temp.</label>
+                    <input type="number" name="stress_tmp" min="0" max="10" value="0"
+                    onkeyup="setStressPerm(this); setStressGauge();">
+                </div>
+                <div>
+                    <label for="stress_perm">Perm.</label>
+                    <input type="number" name="stress_perm" min="0" max="10" value="0">
+                </div>
+                <div>
+                    <label for="stress_threshold">Seuil</label>
+                    <input type="number" name="stress_threshold" min="0" max="10" value="5" readonly>
+                </div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress" id="stress_tmp-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="info subsection section1" id="description">
+        <h2><label for="description">Description</label></h2>
+        <textarea type="text" name="description" rows="4"></textarea>
+    </div>
+
+    <div class="info subsection section1">
+        <h2>Attaque</h2>
+
+    </div>
+
+    <div class="info subsection section2">
+        Test
+    </div>
+
+    <!------------------------------------------------------------------------------------------->
+    <!-- INVENTORY SECTION - section 3                                                         -->
+    <!------------------------------------------------------------------------------------------->
+    <div class="info subsection section3">
+        <!-- Objet | Nombre | Prix  | Poids | Equipé | Remove
+             Add            | Total | Total | Total  |
+
+             Bourse
+        -->
+        <div class="inventory">
+            <h2>Joueur</h2>
+            <div class="field">
+                <div class="text_field">Objet</div>
+                <div class="number_field">Quantité</div>
+                <div class="number_field">Prix</div>
+                <div class="number_field">Poids</div>
+                <div class="check_field">Equipé</div>
+                <div class="button_field">Suppr.</div>
+            </div>
+            <div id="player_items"></div>
+            <div class="summary">
+                <div class="text_field">
+                    <button class="add_button" onclick="addNewField('player_items');">Plus</button>
+                </div>
+                <div class="number_field"></div>
+                <div class="number_field">
+                    <button class="total_price" id="price-player_items" min="0" value="" readonly>0</button>
+                </div>
+                <div class="number_field">
+                    <button class="total_weight" id="weight-player_items" min="0" value="" readonly>0</button>
+                </div>
+                <div class="check_field"></div>
+                <div class="button_field"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- To include JavaScript to roll20 -->
+    <script type="text/worker">
+    </script>
+</div>

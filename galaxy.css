@@ -1,0 +1,322 @@
+/************************************************************************/
+/* COMMON style                                                         */
+/************************************************************************/
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url("./images/image2.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* Hide rarrows from number input */
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+label, h2 {
+    color: white;
+}
+
+
+/************************************************************************/
+/* INFO section                                                         */
+/************************************************************************/
+.info {
+    display: flex;
+    flex-flow: row wrap;
+    align-content: stretch;
+    margin: 0 7% 2% 7%;  /* top, right, bottom, left */
+}
+
+
+/************************************************************************/
+/* CHARACTER section                                                    */
+/************************************************************************/
+#character-info {
+    margin-top: 13%;
+}
+#character-info div {
+    flex: 25%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: flex-start;
+}
+
+#character-info input[type='number'] {
+    width: 25%;
+}
+
+#character-info input {
+    height: 2em;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 4px;
+    border-color:#083E47;
+}
+
+#character-info label {
+    margin-bottom: 3px;
+}
+
+#character-info div label:nth-of-type(2) {
+    margin-top: 7px;
+}
+
+
+/************************************************************************/
+/* CHARACTERISTIC section                                               */
+/************************************************************************/
+#characteristic-info div {
+    flex: 11%;
+    display: flex;
+    flex-flow: column nowrap;
+    padding: 4px;
+    align-items: center;
+}
+
+#characteristic-info input {
+    height: 4em;
+    border-style: solid;
+    border-radius: 25%;
+    border-color: white;
+    color: white;
+    border-width: 1%;
+    text-align: center;
+    margin-top: 10px;
+}
+
+#characteristic-info input:read-only {
+    background-color: #8b1538;
+}
+
+#characteristic-info input:read-write {
+    background-color: #083E47;
+}
+
+#characteristic-info button {
+    border-style: solid;
+    border-radius: 25%;
+    color: white;
+    background-color: #8b1538;
+    height: 2em;
+    width: 6em;
+}
+
+#characteristic-info div:last-child button {
+    background-color: transparent;
+    border-color: transparent;
+    height: 2em;
+}
+
+#characteristic-error {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+
+/************************************************************************/
+/* TAB selection                                                        */
+/************************************************************************/
+#tab {
+    flex:25%;
+    flex-flow: row nowrap;
+    overflow: hidden;
+    border: 1px solid white;
+    background-color: #8b1538;
+}
+
+#tab button {
+    background-color: inherit; 
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+    width: 100%;
+    color: white;
+}
+
+#tab button:hover:not(.active) {
+    background-color: white;
+    color: #8b1538;
+}
+
+#tab button.active {
+    background-color: #083E47;
+}
+
+.subsection {
+    display: none;
+}
+
+
+/************************************************************************/
+/* ENDURANCE & STRESS section                                           */
+/************************************************************************/
+#endurance_stress-info div {
+    flex: 50%;
+}
+
+#endurance_stress-info h2 {
+    text-align: center;
+    margin-top: 0;
+}
+
+#endurance, #stress {
+    display: flex;
+    flex-direction: row;
+}
+
+#endurance div, #stress div {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+}
+
+#endurance_stress-info input {
+    width: 25%;
+    height: 2em;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 4px;
+    border-color:#083E47;
+    text-align: center;
+    color: black;
+}
+
+.progress-bar {
+    align-items: center;
+    width: 65%;
+    margin: auto;
+    background-color: white;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+}
+
+.progress {
+    padding: 7px 0 7px 0; /* top, right, bottom, left */
+    color: white;
+    margin-top: 2.5%;
+}
+
+#endurance-progresse { 
+    width: 100%; 
+    background-color: #8b1538;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+}
+#stress_tmp-progress { 
+    width: 0%;
+    background-color: black;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+}
+
+
+/************************************************************************/
+/* DESCRIPTION section                                                  */
+/************************************************************************/
+#description {
+    flex-direction: column;
+}
+
+#description label {
+    margin-bottom: 0.5%;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+#description textarea {
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 4px;
+    border-color:#083E47;
+}
+
+
+/************************************************************************/
+/* ENDURANCE & STRESS section                                           */
+/************************************************************************/
+.inventory {
+    flex: 100%;
+}
+
+/* Style du champ objet | quantité | prix | poids | equipé | suppr. */
+.field {
+    display: flex;
+    flex-flow: row nowrap;
+    background-color: #8b1538;
+}
+
+.field div {
+    padding: 5px 16px;
+    color: white;
+    border: 1px solid white;
+}
+
+.text_field {
+    width: 50%;
+}
+.number_field, .check_field, .button_field {
+    width: 10%;
+}
+
+/* Style du champ avec les boutons ajouté et total*/
+.summary {
+    display: flex;
+    flex-flow: row nowrap;
+    margin-top: 0.5%;
+}
+.add_button, .total_price, .total_weight {
+    padding: 5px 16px;
+}
+.total_price, .total_weight {
+    width: 100%;
+}
+.add_button {
+    width: 20%;
+}
+
+/* Style du champ avec les items */
+#player_items {
+    border: 1px solid white;
+}
+
+#player_items:empty {
+    border: none;
+}
+
+.item {
+    display: flex;
+    flex-flow: row nowrap;
+    padding: 5px 0px;
+}
+.item:first-child {
+    margin-top: 5px;
+}
+.item:last-child {
+    margin-bottom: 5px;
+}
+
+.item input[type='text'] {
+    width: 99%;
+    float: right;
+}
+.item input[type='button'] {
+    width: 95%;
+    float: left;
+}
+.item input[type='number'],
+.item input[type='checkbox'] {
+    width: 100%;
+}
