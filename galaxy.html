@@ -55,66 +55,64 @@
             <button name="roll_Check" type="roll" value="">
                 <label for="quick">Agilité</label>
             </button>
-            <input type="number" name="quick" min="5" max="15" value="10" 
-            onkeyup="checkCharacteristic(this);" onchange="setTotal(this);" title="Utilisé les fleches pour changer la valeur">
+            <input type="number" name="quick" min="0" value="50" title="Utilisez &#8593 & &#8595 pour changer la valeur" 
+            onblur="checkCharacteristic(this);" onchange="setTotal(this);">
         </div>
         <div>
             <button name="roll_Check" type="roll" value="">
                 <label for="cunning">Astuce</label>
             </button>
-            <input type="number" name="cunning" min="5" max="15" value="10" 
-            onkeyup="checkCharacteristic(this);" onchange="setTotal(this);">
+            <input type="number" name="cunning" min="0" value="10" title="Utilisez &#8593 & &#8595 pour changer la valeur" 
+            onblur="checkCharacteristic(this);" onchange="setTotal(this);">
         </div>
         <div>
             <button name="roll_Check" type="roll" value="">
                 <label for="discreet">Discrétion</label>
             </button>
-            <input type="number" name="discreet" min="5" max="15" value="10" 
-            onkeyup="checkCharacteristic(this);" onchange="setTotal(this);">
+            <input type="number" name="discreet" min="0" value="10" title="Utilisez &#8593 & &#8595 pour changer la valeur" 
+            onblur="checkCharacteristic(this);" onchange="setTotal(this);">
         </div>
         <div>
             <button name="roll_Check" type="roll" value="">
                 <label for="strong">Force</label>
             </button>
-            <input type="number" name="strong" min="5" max="15" value="10" 
-            onkeyup="checkCharacteristic(this); setToughness();" onchange="setTotal(this);">
+            <input type="number" name="strong" min="0" value="10" title="Utilisez &#8593 & &#8595 pour changer la valeur" 
+            onkeyup="setToughness();" onchange="setTotal(this);">
         </div>
         <div>
             <button name="roll_Check" type="roll" value="">
                 <label for="persuasive">Persuasion</label>
             </button>
-            <input type="number" name="persuasive" min="5" max="15" value="10" 
-            onkeyup="checkCharacteristic(this);" onchange="setTotal(this);">
+            <input type="number" name="persuasive" min="0" value="10" title="Utilisez &#8593 & &#8595 pour changer la valeur"
+            onblur="checkCharacteristic(this);" onchange="setTotal(this);">
         </div>
         <div>
             <button name="roll_Check" type="roll" value="">
                 <label for="accurate">Précision</label>
             </button>
-            <input type="number" name="accurate" min="5" max="15" value="10" 
-            onkeyup="checkCharacteristic(this);" onchange="setTotal(this);">
+            <input type="number" name="accurate" min="0" value="10" title="Utilisez &#8593 & &#8595 pour changer la valeur"
+            onblur="checkCharacteristic(this);" onchange="setTotal(this);">
         </div>
         <div>
             <button name="roll_Check" type="roll" value="">
                 <label for="vigilant">Vigilance</label>
             </button>
-            <input type="number" name="vigilant" min="5" max="15" value="10" 
-            onkeyup="checkCharacteristic(this);" onchange="setTotal(this);">
+            <input type="number" name="vigilant" min="0" value="10" title="Utilisez &#8593 & &#8595 pour changer la valeur"
+            onblur="checkCharacteristic(this);" onchange="setTotal(this);">
         </div>
         <div>
             <button name="roll_Check" type="roll" value="">
                 <label for="resolute">Volonté</label>
             </button>
-            <input type="number" name="resolute" min="5" max="15" value="10" 
-            onkeyup="checkCharacteristic(this); setStress();" onchange="setTotal(this);">
+            <input type="number" name="resolute" min="0" value="10" title="Utilisez &#8593 & &#8595 pour changer la valeur" 
+            onkeyup="setStress();" onchange="setTotal(this);">
         </div>
         <div>
             <button value="">
                 <label for="total">Total</label>
             </button>
-            <input type="number" name="total" min="40" max="80" value="" readonly>
-        </div>       
-        
-        <div id="characteristic-error"></div>
+            <input type="number" name="total" min="0" value="" readonly>
+        </div>
     </div>
     
     <!------------------------------------------------------------------------------------------->
