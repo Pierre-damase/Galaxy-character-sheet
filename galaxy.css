@@ -11,12 +11,17 @@ body {
     background-size: 100%;
 }
 
+/* Hide rarrows from number input for Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-    /* Hide rarrows from number input */
     -webkit-appearance: none;
     margin: 0;
 }
+
+/* Hide rarrows from number input for Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+  }
 
 label, h2 {
     color: white;
@@ -83,11 +88,11 @@ label, h2 {
 
 #characteristic-info input {
     height: 4em;
+    width: 4em;
     border-style: solid;
     border-radius: 25%;
     border-color: white;
     color: white;
-    border-width: 1%;
     text-align: center;
     margin-top: 10px;
 }
@@ -113,12 +118,6 @@ label, h2 {
     background-color: transparent;
     border-color: transparent;
     height: 2em;
-}
-
-#characteristic-error {
-    text-align: center;
-    font-weight: bold;
-    font-size: 1.5em;
 }
 
 

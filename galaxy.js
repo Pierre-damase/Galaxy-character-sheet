@@ -5,82 +5,45 @@ window.addEventListener('load', function() {
     setStress();
 });
 
-function checkEmpty(field) {
-    field.style.borderColor = (field.value === "") ? "#8b1538" : "#083E47";
-}
-
 function getTotal() {
-    let quick = parseInt(document.getElementsByName('quick')[0].value);
-    let cunning = parseInt(document.getElementsByName('cunning')[0].value);
-    let discreet = parseInt(document.getElementsByName('discreet')[0].value);
-    let strong = parseInt(document.getElementsByName('strong')[0].value);
-    let persuasive = parseInt(document.getElementsByName('persuasive')[0].value);
-    let accurate = parseInt(document.getElementsByName('accurate')[0].value);
-    let vigilant = parseInt(document.getElementsByName('vigilant')[0].value);
-    let resolute = parseInt(document.getElementsByName('resolute')[0].value);
+    let total;
 
-    return [quick, cunning, discreet, strong, persuasive, accurate, vigilant, resolute]
+    total = parseInt(document.getElementsByName('quick')[0].value);
+    total += parseInt(document.getElementsByName('cunning')[0].value);
+    total += parseInt(document.getElementsByName('discreet')[0].value);
+    total += parseInt(document.getElementsByName('strong')[0].value);
+    total += parseInt(document.getElementsByName('persuasive')[0].value);
+    total += parseInt(document.getElementsByName('accurate')[0].value);
+    total += parseInt(document.getElementsByName('vigilant')[0].value);
+    total += parseInt(document.getElementsByName('resolute')[0].value);
+
+    return total
 }
 
-function sum(arr) {
-    let somme = 0;
-    arr.forEach(value => {
-        somme += value;
-    });
-    return somme;
-}
+function setTotal() {
+    let field, total, warning;
 
-function counter(arr, number) {
-    let occ = 0;
-    arr.forEach(value => {
-        if (value === number) { occ++; } 
-    });
-    return occ;
-}
-
-function setTotal(field) {
-    let total = sum(getTotal());
+    field = document.getElementsByName('total')[0];
+    total = getTotal();
 
     if (total > 80) {
-        field.value = 10;
-        let err = document.getElementById("characteristic-error");
-        let msg = "La somme des caratéritiques ne doit pas excéder 80 !"
-        showErrMessage(err, msg);
+        warning = "La somme des caratéritiques est > 80, veuillez vérifier avec le mj que c'est en accord avec les règles";
+        
+        field.setAttribute('title', warning);
     }
     else {
-        document.getElementsByName('total')[0].value = total;
+        field.setAttribute('title', "");
     }
+    
+    field.value = total;
 }
 
-function checkCharacteristic(characteristic) {
-    let val  = characteristic.value;
-    let err = document.getElementById("characteristic-error");
-    if (val < 5 || val > 20) {
-        characteristic.value = 10;
-        let msg = "Les charactéristiques doivent être comprise entre 5 et 20 inclus !"
-        showErrMessage(err, msg);
-    }
-    else if (val == 5) {
-        if (counter(getTotal(), 5) > 1) {
-            characteristic.value++;
-            let msg = "Une seule charactéristique peut être égal à 5 !"
-            showErrMessage(err, msg);
-        }
-    } else if (val == 15) {
-        if (counter(getTotal(), 15) > 1) {
-            characteristic.value--;
-            let msg = "Une seule charactéristique peut être égal à 15 !"
-            showErrMessage(err, msg);
-        }
-    }
+function checkCharacteristic(field) {
+    let value = field.value;
+
+    field.style.borderColor = (value === "" || value < 5 || value > 15) ? "#8b1538" : "white";
 }
 
-function showErrMessage(err, msg) {
-    err.innerHTML = msg;
-    setTimeout(function() {
-        err.innerHTML = ""
-    }, 5000);
-}
 
 function setToughness() {
     let force = parseInt(document.getElementsByName('strong')[0].value);
