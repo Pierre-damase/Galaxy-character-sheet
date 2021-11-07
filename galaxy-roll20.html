@@ -1,0 +1,399 @@
+<!-- The HTML will automatically refer to the CSS code and classes -->
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" href="galaxy.css">
+    <script src="galaxy.js"></script>
+</head>
+<!-- TAB -->
+
+<!-- Character sheet -->
+<div class="charsheet"> 
+
+    <!------------------------------------------------------------------------------------------->
+    <!-- CHARACTER SECTION                                                                     -->
+    <!------------------------------------------------------------------------------------------->
+    <div class="info character-info">
+        
+        <div class="joueur">
+            <label for="joueur">Joueur:</label>
+            <input type="text" name="attr_player" placeholder="William" onblur="checkEmpty(this);" title="Le nom du Joueur">
+        </div>
+        
+        <div class="identite">
+            <label for="nom">Nom:</label>
+            <input type="text" name="attr_character-name" placeholder="Nom" onblur="checkEmpty(this);" title="Le nom du personnage">
+
+            <label for="age">Age:</label>
+            <input type="number" name="age" placeholder="6" min="1" onblur="checkEmpty(this);" title="Age du personnage" >
+        </div>
+
+        <div class="type">
+            <label for="type">Type:</label>
+            <input type="text" name="attr_type" placeholder="Humain.e" onblur="checkEmpty(this);" title="Le type d'humain du personnage">
+
+            <label for="archétype">Archétype:</label>
+            <input type="text" name="attr_archetype" placeholder="Soldat" onblur="checkEmpty(this);" title="L'archetype du personnage">
+            
+        </div>
+
+        <div class="xp">
+            <label for="xp">xp:</label>
+            <input type="number" name="attr_xp" placeholder="50" min="1" onblur="checkEmpty(this);" title="L'experience total obtenues par le personnage">
+    
+            <label for="unused-xp">xp non utilisé:</label>
+            <input type="number" name="attr_unused-xp" placeholder="50" onblur="checkEmpty(this);" title="L'experience pas encore utilisés par le personnage">
+        </div>
+    </div>
+
+    <!------------------------------------------------------------------------------------------->
+    <!-- CHARACTERISTIC SECTION                                                                -->
+    <!------------------------------------------------------------------------------------------->
+    <div class="info characteristic-info">
+        <!-- Ajouté code symbaroum pour roll20 quand on appuie sur les boutons -->
+        <div>
+            <button name="roll_Check" type="roll" value="">
+                <span for="cunning">Agilité</span>
+            </button>
+            <input type="number" name="attr_quick" min="0" value="50" title="Utilisez &#8593 & &#8595 pour changer la valeur" 
+            onblur="checkCharacteristic(this);" onchange="setTotal(this);">
+        </div>
+        <div>
+            <button name="roll_Check" type="roll" value="">
+                <span for="cunning">Astuce</span>
+            </button>
+            <input type="number" name="attr_cunning" min="0" value="10" title="Utilisez &#8593 & &#8595 pour changer la valeur" 
+            onblur="checkCharacteristic(this);" onchange="setTotal(this);">
+        </div>
+        <div>
+            <button name="roll_Check" type="roll" value="">
+                <span for="quick">Agilité</span>
+            </button>
+            <input type="number" name="attr_discreet" min="0" value="10" title="Utilisez &#8593 & &#8595 pour changer la valeur" 
+            onblur="checkCharacteristic(this);" onchange="setTotal(this);">
+        </div>
+        <div>
+            <button name="roll_Check" type="roll" value="">
+                <span for="strong">Force</span>
+            </button>
+            <input type="number" name="attr_strong" min="0" value="10" title="Utilisez &#8593 & &#8595 pour changer la valeur" 
+            onkeyup="setToughness();" onchange="setTotal(this);">
+        </div>
+        <div>
+            <button name="roll_Check" type="roll" value="">
+                <span for="persuasive">Peruasion</span>
+            </button>
+            <input type="number" name="attr_persuasive" min="0" value="10" title="Utilisez &#8593 & &#8595 pour changer la valeur"
+            onblur="checkCharacteristic(this);" onchange="setTotal(this);">
+        </div>
+        <div>
+            <button name="roll_Check" type="roll" value="&amp;{template:attrib}{{name=^{accurate}}} {{character=@{character-name}}} {{attribute=[[@{accurate}+(?{Modifier +/-|0})]]}} {{roll=[[1d20]]}}">
+                <span for="accurate">Précision</span>
+            </button>
+            <input type="number" name="attr_accurate" min="0" value="10" title="Utilisez &#8593 & &#8595 pour changer la valeur"
+            onblur="checkCharacteristic(this);" onchange="setTotal(this);">
+        </div>
+        <div>
+            <button name="roll_Check" type="roll" value="">
+                <span for="vigilant">Vigilance</span>
+            </button>
+            <input type="number" name="attr_vigilant" min="0" value="10" title="Utilisez &#8593 & &#8595 pour changer la valeur"
+            onblur="checkCharacteristic(this);" onchange="setTotal(this);">
+        </div>
+        <div>
+            <button name="roll_Check" type="roll" value="">
+                <span for="resolute">Volonté</span>
+            </button>
+            <input type="number" name="attr_resolute" min="0" value="10" title="Utilisez &#8593 & &#8595 pour changer la valeur" 
+            onkeyup="setStress();" onchange="setTotal(this);">
+        </div>
+        <div>
+            <button value="">
+                <span for="total">Total</span>
+            </button>
+            <input type="number" name="attr_total" min="0" value="" readonly>
+        </div>
+    </div>
+    
+    <!------------------------------------------------------------------------------------------->
+    <!-- TAB SECTION                                                                           -->
+    <!------------------------------------------------------------------------------------------->
+    <div class="info tab">
+        <button class="tablinks" onclick="openTab(this, 'section1');">Personnage</button>
+        <button class="tablinks" onclick="openTab(this, 'section2');">Compétences</button>
+        <button class="tablinks default-tab" onclick="openTab(this, 'section3');">Inventaire</button>
+    </div>
+
+    <!------------------------------------------------------------------------------------------->
+    <!-- ENDURANCE/STRESS SECTION - section 1                                                  -->
+    <!------------------------------------------------------------------------------------------->
+    <div class="info subsection section1 endurance_stress-info">
+        <div>
+            <h2>Endurance</h2>
+            <div class="endurance">
+                <div>
+                    <label for="current">Actuelle</label>
+                    <input type="number" name="current" min="0" max="15" value="10"
+                    onkeyup="setToughnessGauge();">
+                </div>
+                <div>
+                    <label for="toughness_max">Max.</label>
+                    <input type="number" name="toughness_max" min="0" max="15" value="" readonly>
+                </div>
+                <div>
+                    <label for="pain_threshold">Rés. à la douleur</label>
+                    <input type="number" name="pain_threshold" min="0" max="10" value="5" readonly>
+                </div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress" class="endurance-progresse"></div>
+            </div>
+        </div>
+
+        <div>
+            <h2>Stress</h2>
+            <div class="stress">
+                <div>
+                    <label for="stress_tmp">Temp.</label>
+                    <input type="number" name="stress_tmp" min="0" max="10" value="0"
+                    onkeyup="setStressPerm(this); setStressGauge();">
+                </div>
+                <div>
+                    <label for="stress_perm">Perm.</label>
+                    <input type="number" name="stress_perm" min="0" max="10" value="0">
+                </div>
+                <div>
+                    <label for="stress_threshold">Seuil</label>
+                    <input type="number" name="stress_threshold" min="0" max="10" value="5" readonly>
+                </div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress stress_tmp-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="info subsection section1 description">
+        <h2><label for="description">Description</label></h2>
+        <textarea type="text" name="description" rows="4"></textarea>
+    </div>
+
+    <div class="info subsection section1">
+        <h2>Attaque</h2>
+
+    </div>
+
+    <div class="info subsection section2">
+        Test
+    </div>
+
+    <!------------------------------------------------------------------------------------------->
+    <!-- INVENTORY SECTION - section 3                                                         -->
+    <!------------------------------------------------------------------------------------------->
+    <div class="info subsection section3">
+        <!-- Objet | Nombre | Prix  | Poids | Equipé | Remove
+             Add            | Total | Total | Total  |
+
+             Bourse
+        -->
+        <div class="inventory">
+            <h2>Joueur</h2>
+            <div class="field">
+                <div class="text_field">Objet</div>
+                <div class="number_field">Quantité</div>
+                <div class="number_field">Prix</div>
+                <div class="number_field">Poids</div>
+                <div class="check_field">Equipé</div>
+                <div class="button_field">Suppr.</div>
+            </div>
+            <div class="player_items"></div>
+            <div class="summary">
+                <div class="text_field">
+                    <button class="add_button" onclick="addNewField('player_items');">Plus</button>
+                </div>
+                <div class="number_field"></div>
+                <div class="number_field">
+                    <button class="total_price price-player_items" min="0" value="" readonly>0</button>
+                </div>
+                <div class="number_field">
+                    <button class="total_weight weight-player_items" min="0" value="" readonly>0</button>
+                </div>
+                <div class="check_field"></div>
+                <div class="button_field"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Custom RollTemplate for roll20 -->
+    <rolltemplate class="sheet-rolltemplate-abilitycheck">
+        <table>
+    	      <tr><th class="attribhead" colspan="2">{{name}}</th></tr>
+		        {{#rollLess() selected 0}}
+        	  <tr><td class="attribcat" colspan="2">{{character}} has failed to select an Attribute for this Ability</td></tr>
+            {{/rollLess() selected 0}}
+            {{#rollGreater() selected 0}}
+    		    <tr><td class="attribcat"><span data-i18n="character">Character</span>:&nbsp;</td><td class="attribresult">{{character}}</td></tr>
+    		    <tr><td class="attribcat"><span data-i18n="attribute">Attribute</span>:&nbsp;</td><td class="attribresult">{{attribute}}</td></tr>
+    		    <tr><td class="attribcat"><span data-i18n="dice-roll">Roll</span>:&nbsp;</td><td class="attribresult">{{roll}}</td></tr>
+    		    {{#rollLess() roll attribute}}
+    			  <tr class="effex"><td colspan="2"><span class="attribhit" data-i18n="success">Success</span>!</td></tr>
+    		    {{/rollLess() roll attribute}}
+    		    {{#rollTotal() roll attribute}}
+    			  <tr class="effex"><td colspan="2"><span class="attribhit" data-i18n="success">Success</span>!</td></tr>
+    		    {{/rollTotal() roll attribute}}
+    		    {{#rollGreater() roll attribute}}
+    		    <tr class="effex"><td colspan="2"><span class="attribmiss" data-i18n="failure">Failure</span>...</td></tr>
+    		    {{/rollGreater() roll attribute}}
+    	      {{/rollGreater() selected 0}}
+        </table>
+    </rolltemplate>
+    <rolltemplate class="sheet-rolltemplate-attrib">
+        <table>
+		        <tr><th class="attribhead" colspan="2">{{name}}</th></tr>
+		        <tr><td class="attribcat"><span data-i18n="character">Character</span>:&nbsp;</td><td class="attribresult">{{character}}</td></tr>
+		        <tr><td class="attribcat"><span data-i18n="attribute">Attribute</span>:&nbsp;</td><td class="attribresult">{{attribute}}</td></tr>
+		        <tr><td class="attribcat"><span data-i18n="dice-roll">Roll</span>:&nbsp;</td><td class="attribresult">{{roll}}</td></tr>
+		        {{#rollLess() roll attribute}}
+			      <tr class="effex"><td colspan="2"><span class="attribhit" data-i18n="success">Success</span>!</td></tr>
+		        {{/rollLess() roll attribute}}
+		        {{#rollTotal() roll attribute}}
+			      <tr class="effex"><td colspan="2"><span class="attribhit" data-i18n="success">Success</span>!</td></tr>
+		        {{/rollTotal() roll attribute}}
+		        {{#rollGreater() roll attribute}}
+		        <tr class="effex"><td colspan="2"><span class="attribmiss" data-i18n="failure">Failure</span>...</td></tr>
+		        {{/rollGreater() roll attribute}}
+        </table>
+    </rolltemplate>
+    <rolltemplate class="sheet-rolltemplate-powercheck">
+        <table>
+		        <tr><th class="attribhead" colspan="2">{{name}}</th></tr>
+		        <tr><td class="attribcat"><span data-i18n="character">Character</span>:&nbsp;</td><td class="attribresult">{{character}}</td></tr>
+		        <tr><td class="attribcat"><span data-i18n="attribute">Attribute</span>:&nbsp;</td><td class="attribresult">{{attribute}}</td></tr>
+		        <tr><td class="attribcat"><span data-i18n="dice-roll">Roll</span>:&nbsp;</td><td class="attribresult">{{roll}}</td></tr>
+		        {{#rollLess() roll attribute}}
+			      <tr class="effex"><td colspan="2"><span class="attribhit" data-i18n="success">Success</span>!</td></tr>
+		        {{/rollLess() roll attribute}}
+		        {{#rollTotal() roll attribute}}
+			      <tr class="effex"><td colspan="2"><span class="attribhit" data-i18n="success">Success</span>!</td></tr>
+		        {{/rollTotal() roll attribute}}		
+		        {{#rollGreater() roll attribute}}
+		        <tr class="effex"><td colspan="2"><span class="attribmiss" data-i18n="failure">Failure</span>...</td></tr>
+		        {{/rollGreater() roll attribute}}
+        </table>
+    </rolltemplate>
+    <rolltemplate class="sheet-rolltemplate-defense">
+        <table>
+            {{#rollLess() defense-type 0}}
+    		    <tr><th class="defhead" colspan="2">{{character-name}}&nbsp;<span data-i18n="negates-extra-damage">negates extra damage</span>{{#name}}&nbsp;<span data-i18n="using">using</span>&nbsp;{{name}}{{/name}}</th></tr>
+            <tr><td class="defcat"><span data-i18n="damage-negated">Damage negated</span>:</td><td class="defresult">{{damage-taken}}</td></tr>
+            {{/rollLess() defense-type 0}}
+        
+            {{#rollGreater() defense-type 0}}                
+			      <tr><th class="defhead" colspan="2">{{character-name}}&nbsp;<span data-i18n="defends">defends</span>{{#name}}&nbsp;<span data-i18n="with">with</span>&nbsp;{{name}}{{/name}}</th></tr>
+			      <tr><td class="defcat"><span data-i18n="attribute">Attribute</span>:</td><td class="defresult">{{attribute}}</td></tr>
+			      <tr><td class="defcat"><span data-i18n="dice-roll">Roll</span>:</td><td class="defresult">{{defense-roll}}</td></tr>
+			      {{#rollLess() defense-roll attribute1}} <!-- miss -->
+			      {{#^rollWasFumble() defense-roll}}<tr><th class="effex" colspan="2"><span class="defmiss"><span data-i18n="enemy-missed">Enemy missed</span>!</span></th></tr>{{/^rollWasFumble() defense-roll}}
+			      {{#rollWasFumble() defense-roll}} <tr><th class="effex" colspan="2" style="text-shadow:1px 1px 1px Black"><span class="defmiss"><span data-i18n="enemy-critically-missed">Enemy critically missed</span>!</span></th></tr>{{/rollWasFumble() defense-roll}}
+			      {{/rollLess() defense-roll attribute1}}
+			      
+			      {{#rollGreater() defense-roll attribute}} <!-- hit -->
+				    {{#^rollWasCrit() defense-roll}}<tr><th colspan="2" style="border-bottom:0px;"><span class="defhit"><span data-i18n="enemy-hit">Enemy hit</span>!</span></th></tr>{{/^rollWasCrit() defense-roll}}
+				    {{#rollWasCrit() defense-roll}}<tr><th colspan="2" style="border-bottom:0px;"><span class="defhit"><span style="text-shadow:1px 1px 1px Black" data-i18n="enemy-critically-hit">Enemy critically hit</span>!</span></th></tr>{{/rollWasCrit() defense-roll}}
+            {{#rollGreater() damage-taken 0 }}<tr style="background-color:#ffffff"><td class="effex" colspan="2"><span data-i18n="damage-negated">Damage negated</span>:&nbsp;{{damage-taken}}</td></tr>{{/rollGreater() damage-taken 0 }}
+            {{#rollLess() damage-taken 1}}<tr style="background-color:#ffffff"><td class="effex" colspan="2"><span data-i18n="damage-negated">Damage negated</span>:&nbsp;0</td></tr>{{/rollLess() damage-taken 1}}
+			      {{/rollGreater() defense-roll attribute}}
+            {{/rollGreater() defense-type 0}}
+        </table>
+    </rolltemplate>
+    <rolltemplate class="sheet-rolltemplate-attack">
+        <table>
+            {{#rollLess() attack-type 0}}
+        	  <tr><th class="attkhead" colspan="2">{{character-name}}&nbsp;<span data-i18n="does-extra-damage">does extra damage</span>&nbsp;{{#name}}&nbsp;<span data-i18n="with">with</span>&nbsp;{{name}}{{/name}}</th></tr>
+			      <tr style="background-color:#ffffff"><td class="attkcat"><span data-i18n="damage">Damage</span>:</td><td class="attkresult">{{damage}}</td></tr>		
+            {{/rollLess() attack-type 0}}
+            {{#rollGreater() attack-type 0}}
+            
+			      <tr><th class="attkhead" colspan="2">{{character-name}}&nbsp;<span data-i18n="attacks-chat">attacks</span>{{#name}}&nbsp;<span data-i18n="with">with</span>&nbsp;{{name}}{{/name}}</th></tr>
+            <tr><td class="attkcat"><span data-i18n="attribute">Attribute</span>:&nbsp;</td><td class="attkresult">{{attribute}}</td></tr>
+            <tr><td class="attkcat"><span data-i18n="dice-roll">Roll</span>:&nbsp;</td><td class="attkresult">{{attack}}</td></tr> 
+			      {{#rollLess() attack attribute1}}
+				    {{#^rollWasFumble() attack}}<tr><th class="effex" colspan="2"><span class="attkhit"><span data-i18n="attack-hit">Attack hit</span>!</span></th></tr>{{/^rollWasFumble() attack}}
+				    {{#rollWasFumble() attack}} <tr><th class="effex" colspan="2" style="text-shadow:1px 1px 1px Black"><span class="attkhit"><span data-i18n="attack-critically-hit">Attack critically hit</span>!</span></th></tr>{{/rollWasFumble() attack}}
+				    {{#rollGreater() damage 0}}<tr style="background-color:#ffffff"><td class="effex" colspan="2"><span data-i18n="damage">Damage</span>:&nbsp;{{damage}} {{#rollWasFumble() attack}}<span> + </span> {{damage-crit}} {{/rollWasFumble() attack}}</td></tr>{{/rollGreater() damage 0}}
+			      {{/rollLess() attack attribute1}}
+			      
+			      {{#rollGreater() attack attribute}}
+				    {{#^rollWasCrit() attack}}<tr><th colspan="2"><span data-i18n="attack-missed">Attack missed</span>!</th></tr>{{/^rollWasCrit() attack}}
+				    {{#rollWasCrit() attack}}<tr><th colspan="2" style="text-shadow:1px 1px 1px Black"><span data-i18n="attack-critically-missed">Attack critically missed</span>!</span></th></tr>{{/rollWasCrit() attack}}
+			      {{/rollGreater() attack attribute}}  
+            {{/rollGreater() attack-type 0}} 
+        </table>
+    </rolltemplate>
+
+
+    <!-- Custom JavaScript for Roll20 -->
+    <script type="text/worker">
+
+     var Sheet = Sheet || (function() {
+         var getTotal = function() {
+
+             getAttrs(["quick", "cunning", "discreet", "strong", "persuasive", "accurate", "vigilant", "resolute"], function(values) {
+                 let total;
+                 let index = ~~values["quick"];
+                 
+                 console.log("index")
+                 console.log(parseInt(index))
+                 
+                 
+                 index = parseInt(values["quick"]);
+                 
+                 console.log("index test 2")
+                 console.log(index)
+                 
+                 
+                 console.log("quick")
+                 console.log(parseInt(values.quick))
+                 total = (parseInt(values.quick) + parseInt(values.cunning)+ parseInt(values.discreet) + parseInt(values.strong)+ parseInt(values.persuasive) + parseInt(values.accurate) + parseInt(values.vigilant) + parseInt(values.resolute));
+                 
+                 console.log("total")
+                 console.log(total)
+                 setAttrs({
+                     'total': total
+                 });
+             });
+         },
+
+             setTotal = function() {
+                 getAttrs(['total'], function(values) {
+                     let total, warning;
+                     
+                     total = getTotal();
+
+                     console.log("total seted")
+                     console.log(total)
+                     
+                     setAttrs({
+                         'total': total
+                     });
+                 });
+             };
+
+         return {
+             getTotal:getTotal,
+             setTotal:setTotal
+         };
+     }());
+
+     on("sheet:opened",function() {Sheet.getTotal();});
+     on("keyup:quick",function() {Sheet.getTotal();});
+     on("change:cunning",function() {Sheet.getTotal();});
+     on("change:discreet",function() {Sheet.getTotal();});
+     on("change:strong",function() {Sheet.getTotal();});
+     on("change:persuasive",function() {Sheet.getTotal();});
+     on("change:accurate",function() {Sheet.getTotal();});
+     on("change:vigilant",function() {Sheet.getTotal();});
+     on("change:resolute",function() {Sheet.getTotal();});
+
+    </script>
+</div>
